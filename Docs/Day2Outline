@@ -1,0 +1,121 @@
+Review of last week
+ representing knowledge
+ RDF triples
+
+ Resources
+ URIs for resources 
+
+SPARQL
+ How many of you are familiar with SQL?
+ Query language
+   turtle notation for RDF triples
+       period at end
+       resources & literals
+
+       Same subject for multiple triples - ;
+       person1 rdf:type foaf:Person;
+               mco:remembered  <http://..../memory1293> .
+
+       Same subject and predicate for multiple triples.
+       song heardBy  person1, person2, person3 .
+               
+   
+  SELECT * WHERE {
+       triple1  .
+       triple2  .
+  }
+
+  Can use * for "return everything", or specify the spefici "variables" we want back.
+
+  SELECT ?s WHERE { ?s rdf:type mco:PersonType .}
+
+ Namespaces and why
+  PREFIX in the query and local bindings.
+
+ The triples in the WHERE clause act as ANDs, so all the conditions must hold.
+
+  SELECT DISTINCT ... WHERE {}  to avoid duplicates 
+
+  LIMIT - after the WHERE { }  you can add LIMIT 10  to get only 10 values back.
+
+  FILTER - based on the values, not the structure.
+     at the end of the WHERE { } clause (but within it), one or more
+ 
+        FILTER ( expression ) 
+   They just have to evaluate to a boolean value.
+    The expressions can refer to any of the variables you created in the triples in the WHERE clause.
+
+
+  UNION
+
+  ORDER BY var
+
+Blank nodes.
+
+
+SELECT * FROM
+
+Federation, SERVICE
+
+
+
+Getting started with git.
+
+git@github.com:dsidavis/ISSSeminar15.git
+
+
+Getting setup with R.
+
+(No reason can't use Python, MATLAB, etc.  Just that we have the tools in R already.)
+
+install RCurl & XML packages
+ install.packages(c("RCurl", "XML"))
+
+Then let's install RSPARQL  (derived from the SPARQL package on CRAN)
+ 3 ways to install this.
+ A.
+    install.packages("devtools")
+    library(devtools)
+    install_github("dsidavis/RSPARQL")
+
+ B. Using git to retrieve it from github.
+    In the terminal:
+       git clone  https://github.com/dsidavis/RSPARQL.git
+       R CMD INSTALL RSPARQL
+
+     (on in R, install.packages("RSPARQL", repos = NULL))
+
+ C.  Download the .tar.gz file and install it locall
+       http://eeyore.ucdavis.edu/MEAMCentral298/RSPARQL.tar.gz
+       R CMD INSTALL RSPARLQ.tar.gz
+ 
+
+Note that it is much easier to get updates from github.
+  Easier for me to push them there (no .tar.gz file and upload to Web site)
+  Easy for you to update directly from R (with devtools or local cloned copy of repos)
+  With local cloned copy, you can make changes and improve RSPARQL and contribute back
+    Fork a copy on github and send pull requests.
+
+Basics of R - data frame
+
+
+To query MEAMCentral, we need an extra layer over the regular SPARQL() function.
+ We need to specify 
+    the URL
+    login and password
+
+ We'll set the password in our R session as an option
+   options(MEAMCentralPassword = "xxxxx")
+ Now we don't have to specify that each time, and the qmeamc  (for query meamc)
+ hides the URL, login and password for us and calls SPARQL.
+
+
+
+SPARQL queries.
+ Can do this from within R or on the Web interface.
+  Good to develop the queries on the Web interface as we learn SPARQL.  
+  Then execute them from R so that the data are back in R and we can work them.
+
+The primary URL for the SPARQL endpoint is 
+  http://meamgraph.ucdavis.edu:10035/catalogs/meamgraph-catalog/repositories/meamgraph_prosem
+ 
