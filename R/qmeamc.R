@@ -19,8 +19,8 @@ function(q, url = "http://meamgraph.ucdavis.edu:10035/catalogs/meamgraph-catalog
 #    if(length(ns)) 
 #       q = paste( c(sprintf("PREFIX %s: %s", names(ns), ns), "", q), collapse = "\n")
 
-    ans = SPARQL(url, query = q, ns = ns, addPrefix = TRUE,
-                  username = username, password = passwd, httpauth = AUTH_BASIC, ..., curl = curl)
+    SPARQL(url, query = q, ns = ns, addPrefix = TRUE,
+              username = username, password = passwd, httpauth = AUTH_BASIC, ..., curl = curl)
 }
 
 # This  assumes a modified version of the SPARQL package code that returns a  data frame with one column
